@@ -25,5 +25,54 @@
         }
       ]
     }
+  },
+
+  "GET /api/users": {
+    "description": "serves an array of all users",
+    "exampleResponse": {
+      "users": [
+        {
+          "username": "rogersop",
+          "name": "Paul",
+          "avatar_url": ""
+        }
+      ]
+    }
+  },
+
+  "GET /api/articles/:article_id": {
+  "description": "Returns a single article by its ID.",
+  "exampleResponse": {
+    "article": {
+      "author": "butter_bridge",
+      "title": "Living in the shadow of a great man",
+      "article_id": 1,
+      "body": "I find this existence challenging",
+      "topic": "mitch",
+      "created_at": "2020-07-09T20:11:00.000Z",
+      "votes": 100,
+      "article_img_url": "https://..."
+    }
   }
+},
+
+"POST /api/articles/:article_id/comments": {
+  "description": "adds a new comment to the article",
+  "exampleRequest": {
+    "username": "butter_bridge",
+    "body": "Great article!"
+  },
+  "exampleResponse": {
+    "comment": {
+      "comment_id": 1,
+      "author": "butter_bridge",
+      "article_id": 1,
+      "body": "Great article!",
+      "created_at": "2020-07-09T20:11:00.000Z",
+      "votes": 0
+    }
+  }
+}
+
+
 }
