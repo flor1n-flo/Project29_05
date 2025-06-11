@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+app.use('/docs', express.static('public'));
+
 const fs = require("fs/promises"); // for reading endpoints.json
 const {handleCustomErrors, handlePsqlErrors,handleServerErrors} = require("./errors/handleErrors");
 const { deleteCommentById } = require("./controllers/comments.controller");
