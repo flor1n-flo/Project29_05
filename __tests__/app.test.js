@@ -6,6 +6,7 @@ const app = require("../app");
 const db = require("../db/connection");
 const seed = require("../db/seeds/seed");
 const testData = require("../db/data/test-data/index");
+require("jest-sorted");
 
 
 /* Set up your beforeEach & afterAll functions here */
@@ -247,6 +248,36 @@ describe("DELETE /api/comments/:comment_id", () => {
       .expect(400)
       .then(({ body }) => {
         expect(body.msg).toBe("Bad request");
+      });
+  });
+});
+
+describe("GET /api/articles with queries", () => {
+  test("200: should return articles sorted by 'title' ascending", () => {
+    return request(app)
+      .get("/api/articles?sort_by=title&order=asc")
+      .expect(200)
+      .then(({ body }) => {
+        const articles = body.articles;
+        expect(articles).toBeSortedBy("title", { ascending: true });
+      });
+  });
+
+  test("400: responds with 'Invalid sort_by column' if sort_by is invalid", () => {
+    return request(app)
+      .get("/api/articles?sort_by=bananas")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Invalid sort_by column");
+      });
+  });
+
+  test("400: responds with 'Invalid order query' if order is invalid", () => {
+    return request(app)
+      .get("/api/articles?order=sideways")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Invalid order query");
       });
   });
 });

@@ -4,7 +4,9 @@ const { updateArticleVotes } = require("../models/articles.model");
 
 
 exports.getArticles = (request, response, next) => {
-  selectAllArticles()
+  //selectAllArticles()
+  const { sort_by = "created_at", order = "desc" } = request.query;
+  selectAllArticles(sort_by, order)
     .then((articles) => {
       response.status(200).send({ articles });
     })
