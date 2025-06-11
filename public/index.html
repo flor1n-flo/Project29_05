@@ -1,21 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Documentation</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Northcoders News API</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Northcoders News API</h1>
-  <p>Welcome to the API! Here are the available endpoints:</p>
-  <ul>
-    <li>GET /api/topics</li>
-    <li>GET /api/articles</li>
-    <li>GET /api/articles/:article_id</li>
-    <li>GET /api/articles/:article_id/comments</li>
-    <li>POST /api/articles/:article_id/comments</li>
-    <li>PATCH /api/articles/:article_id</li>
-    <li>DELETE /api/comments/:comment_id</li>
+    <header>
+        <h1>Northcoders News API</h1>
+        <nav>
+            <ul>
+                <li><a href="#topics">/api/topics</a></li>
+                <li><a href="#articles">/api/articles</a></li>
+                <li><a href="#users">/api/users</a></li>
+                <li><a href="#article-by-id">/api/articles/:article_id</a></li>
+                <li><a href="#post-comment">POST comment</a></li>
+                <li><a href="#patch-article">PATCH article</a></li>
+                <li><a href="#delete-comment">DELETE comment</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="topics">
+            <h2>GET /api/topics</h2>
+            <p>Returns an array of all topics.</p>
+            <pre>{
+  "topics": [
+    { "slug": "coding", "description": "Code is love" },
+    { "slug": "football", "description": "Footie fanatics" }
+  ]
+}</pre>
+        </section>
+
+        <section id="articles">
+            <h2>GET /api/articles</h2>
+            <p>Returns an array of articles with comment count, sorted by date.</p>
+            <pre>{
+  "articles": [
+    {
+      "article_id": 1,
+      "title": "Cats are great",
+      "topic": "cats",
+      "author": "jessjelly",
+      "created_at": "2020-01-01T00:00:00.000Z",
+      "votes": 5,
+      "comment_count": 2
+    }
+  ]
+}</pre>
+        </section>
+
+        <section id="users">
+            <h2>GET /api/users</h2>
+            <p>Returns a list of all users.</p>
+            <pre>{
+  "users": [
+    { "username": "butter_bridge", "name": "Jonny", "avatar_url": "" }
+  ]
+}</pre>
+        </section>
+
+        <section id="article-by-id">
+            <h2>GET /api/articles/:article_id</h2>
+            <p>Returns a specific article by ID.</p>
+        </section>
+
+        <section id="post-comment">
+            <h2>POST /api/articles/:article_id/comments</h2>
+            <p>Adds a new comment to an article.</p>
+            <h4>Example request body:</h4>
+            <pre>{
+  "username": "butter_bridge",
+  "body": "Great article!"
+}</pre>
+        </section>
+
+        <section id="patch-article">
+            <h2>PATCH /api/articles/:article_id</h2>
+            <p>Updates the votes of an article.</p>
+            <h4>Example request body:</h4>
+            <pre>{ "inc_votes": 1 }</pre>
+        </section>
+
+        <section id="delete-comment">
+            <h2>DELETE /api/comments/:comment_id</h2>
+            <p>Deletes a comment by ID. Responds with 204.</p>
+        </section>
+    </main>
 </body>
+
 </html>
