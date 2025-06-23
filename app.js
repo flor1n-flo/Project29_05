@@ -1,5 +1,7 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
+app.use(cors());
 app.use('/docs', express.static('public'));
 
 const fs = require("fs/promises"); // for reading endpoints.json
