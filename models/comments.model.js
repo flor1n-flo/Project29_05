@@ -16,6 +16,20 @@ exports.insertCommentByArticleId = (article_id, username, body) => {
   });
 };
 
+//fetch all comments for a specific article by ID
+exports.selectCommentsByArticleId = (article_id) => {
+  const query = `
+    SELECT comment_id, votes, created_at, author, body, article_id
+    FROM comments
+    WHERE article_id = $1
+    ORDERED BY created_at DESC;
+  `;
+  
+  return db.query(query, [article_id]).then((result) => {
+    return result.rows;
+  });
+};
+
 exports.removeCommentById = (comment_id) => {
   return db.query("DELETE FROM comments WHERE comment_id = $1 RETURNING *;", [comment_id])
     .then((result) => {
