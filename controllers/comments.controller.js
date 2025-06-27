@@ -8,7 +8,11 @@ exports.postCommentByArticleId = (req, res, next) => {
   const { article_id } = req.params;
   const { username, body } = req.body;
 
-  insertCommentByArticleId(article_id, username, body)
+  //checking if the article exist
+  checkIfArticleExists(article_id)
+    .then(() => {
+      return insertCommentByArticleId(article_id, username, body);
+    })
     .then((comment) => {
       res.status(201).send({ comment });
     })
