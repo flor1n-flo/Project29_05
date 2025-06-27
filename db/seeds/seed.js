@@ -8,7 +8,10 @@ const {
 
 const seed = async ({ topicData, userData, articleData, commentData }) => {
   //return db.query();//<< write your first query in here.
-  await db.query(`DROP TABLE IF EXISTS comments, articles, users, topics CASCADE;`);
+  await db.query(`DROP TABLE IF EXISTS comments;`);
+  await db.query(`DROP TABLE IF EXISTS articles;`);
+  await db.query(`DROP TABLE IF EXISTS users;`);
+  await db.query(`DROP TABLE IF EXISTS topics;`);
 
   //creating tables
 
